@@ -20,7 +20,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-name_of_the_app-*.tar
+app_name-*.tar
 
 # If NPM crashes, it generates a log, let's ignore it too.
 npm-debug.log

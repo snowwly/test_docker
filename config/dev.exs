@@ -6,19 +6,17 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :name_of_the_app, NameOfTheAppWeb.Endpoint,
-  http: [port: 4000],
-  debug_errors: true,
-  code_reloader: true,
+config :hello_world, HelloWorldWeb.Endpoint,
+  # Binding to loopback ipv4 address prevents access from other machines.
+  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "rM/QJOrRiW+3WWLw+lHJ8kUFJK/LTrwakSG/ftGYl8jYN0FKqfgS50l2C9BdKMoK",
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
 # ## SSL Support
@@ -46,13 +44,13 @@ config :name_of_the_app, NameOfTheAppWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :name_of_the_app, NameOfTheAppWeb.Endpoint,
+config :app_name, AppNameWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{lib/name_of_the_app_web/views/.*(ex)$},
-      ~r{lib/name_of_the_app_web/templates/.*(eex)$}
+      ~r{lib/app_name_web/views/.*(ex)$},
+      ~r{lib/app_name_web/templates/.*(eex)$}
     ]
   ]
 
@@ -67,9 +65,10 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
-config :name_of_the_app, NameOfTheApp.Repo,
+config :test, Test.Repo,
+  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "name_of_the_app_dev",
+  database: "test_dev",
   hostname: "db",
   pool_size: 10

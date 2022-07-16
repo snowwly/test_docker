@@ -1,9 +1,9 @@
-defmodule NameOfTheApp.MixProject do
+defmodule AppName.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :name_of_the_app,
+      app: :app_name,
       version: "0.1.0",
       elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule NameOfTheApp.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {NameOfTheApp.Application, []},
+      mod: {AppName.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -42,7 +42,7 @@ defmodule NameOfTheApp.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.8"}
+      {:plug_cowboy, "~> 2.0"}
     ]
   end
 
